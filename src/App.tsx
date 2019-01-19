@@ -43,7 +43,7 @@ const App = (props) => (
           ));
         }
 
-        const renderPagination = () => {
+        const RenderPagination = () => {
           return (
             <div style={{
               alignContent: 'center',
@@ -83,11 +83,11 @@ const App = (props) => (
                   </div>
                 </div>
               </div>
-              {renderPagination()}
+              <RenderPagination />
               <div className="product-list columns is-multiline">
                 {isLoading ? <Loading /> : renderCard()}
               </div>
-              {renderPagination()}
+              <RenderPagination />
             </div>
           </>
         );
