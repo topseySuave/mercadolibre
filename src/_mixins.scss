@@ -1,0 +1,30 @@
+
+// color and background
+$transparentBg: rgba(0, 0, 0, 0), rgba(0, 0, 0, .5);
+
+$tablet-width: 968px;
+$desktop-width: 1024px;
+
+@mixin smallerScreen {
+  @media (max-width: #{$tablet-width}) { // the resolution is = or < 968
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) { // the resolution is = or > 1024
+    @content;
+  }
+}
+
+@mixin transition($animation) {
+  transition: $animation;
+  -webkit-transition: $animation;
+  -moz-transition: $animation;
+}
+
+@mixin zoomOutOnHover($percent) {
+  transform: scale($percent);
+  -moz-transform: scale($percent);
+  -webkit-transform: scale($percent);
+}
