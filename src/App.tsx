@@ -12,6 +12,7 @@ interface IProps {
   pagination: any;
   isLoading: boolean;
   handleSortChange: (e: any) => void;
+  handlePageChange: (c, p) => void;
 }
 
 const App = (props) => (
@@ -29,7 +30,11 @@ const App = (props) => (
       </div>
     </section>
     <MainContext.Consumer>
-      {({ data, isLoading, pagination, currentPage, handleSortChange }: IProps) => {
+      {({
+          data, isLoading, pagination,
+          currentPage, handleSortChange,
+          handlePageChange
+        }: IProps) => {
         const renderCard = () => {
           return data.results.map((item, index) => (
             <Card key={index} data={item} />
@@ -48,9 +53,13 @@ const App = (props) => (
             <div style={{
               alignContent: 'center',
               margin: '50px auto',
-              width: '50%'
+              width: '70%'
             }}>
-              <Paginate pagination={pagination} currentPage={currentPage} />
+              <Paginate
+                pagination={pagination}
+                currentPage={currentPage}
+                handlePageChange={handlePageChange}
+              />
             </div>
           );
         }

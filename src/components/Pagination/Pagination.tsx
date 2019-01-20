@@ -5,6 +5,7 @@ import 'rc-pagination/assets/index.css';
 
 interface IProps {
   currentPage?: number;
+  handlePageChange: (c, p) => void;
   pagination?: {
     onChange: () => void;
     pageSize: number;
@@ -20,13 +21,13 @@ const itemRender = (current: any, type: any, element: any) => {
   return element;
 };
 
-const AppPaginate = ({ currentPage, pagination }: IProps) => {
+const AppPaginate = ({ currentPage, pagination, handlePageChange }: IProps) => {
   return <Pagination
     total={pagination.total}
     itemRender={itemRender}
     current={currentPage}
     hideOnSinglePage
-    onChange={() => 'void'}
+    onChange={handlePageChange}
     pageSize={pagination.pageSize}
   />;
 };

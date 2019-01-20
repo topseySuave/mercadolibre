@@ -51,6 +51,8 @@ export default class Main extends React.Component<IProps, IState> {
     super(props);
     this.getMercadolibreData = this.getMercadolibreData.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.getQueries = this.getQueries.bind(this);
   }
 
   public componentWillMount() {
@@ -84,20 +86,32 @@ export default class Main extends React.Component<IProps, IState> {
     }
   }
 
-  public handleSortChange(event: any) {
-    const value = event.target.value;
-    const { search } = this.props.location;
-    const newSearch = queryString.parse(search);
-    let newQuery;
-    if (search.includes('page')) {
-      newQuery = queryString.stringify({ page: newSearch.page, sortBy: value });
-    } else {
-      newQuery = queryString.stringify({ sortBy: value });
-    }
-    window.location.href = `/?${newQuery}`;
+  // this is to sort out the query params and return the final string
+  public getQueries(current: number, value: string) {
+    const query = queryString.stringify({ page: current, sortBy: value });
+    return query;
   }
 
-  public async getMercadolibreData(): Promise<any> {
+  // change the sortBy param when the sort field changes
+  public handleSortChange(event: any) {
+    const value = event.target.value;
+    const query = queryString.stringify({
+      page: this.state.currentPage,
+      sortBy: value
+    });
+    window.location.href = `/?${query}`;
+  }
+
+  // when the next button is clicked on the
+  // pagination component
+  public handlePageChange(current) {
+    const query = queryString.stringify({
+      page: current, sortBy: this.state.sortBy
+    });
+    window.location.href = `/?${query}`;
+  }
+
+  public async getMercadolibreData() {
     const { pagination, sortBy } = this.state;
     let api = `https://api.mercadolibre.com/sites/MLB/search?q=phone&offset=${pagination.offset}&limit=${pagination.pageSize}`;
     
@@ -117,7 +131,8 @@ export default class Main extends React.Component<IProps, IState> {
       <MainContext.Provider
         value={{
           ...this.state,
-          handleSortChange: this.handleSortChange
+          handlePageChange: this.handlePageChange,
+          handleSortChange: this.handleSortChange,
         }}
       >
         {this.props.children}

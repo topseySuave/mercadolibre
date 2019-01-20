@@ -25,7 +25,7 @@ body {
 }
 
 .screen-shrink {
-  width: 60%;
+  width: (100vw / 1.8);
   margin: 10vh auto !important;
   display: flex;
   flex-direction: column;
@@ -50,6 +50,6 @@ body {
 
 @include smallerScreen {
   .screen-shrink {
-    width: 90%; // make the width 90% of the screen
+    width: 90vw; // make the width 90% of the screen
   }
 }
