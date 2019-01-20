@@ -43,8 +43,8 @@ and then follow instructions. When you have successfully logged in now let's dep
 yarn deploy
 ```
 
-I set up a script in package file `"deploy": "yarn build && cd build && now"` which will first build the application
-and then go into the build folder and run `now` to deploy and create a url for the deployed app.
+I set up a script in package file `"deploy": "yarn clean && yarn build && cd build && now --name mercadolibre"` which will first remove the build build folder before building the application
+and then go into the build folder and run `now --name mercadolibre` to deploy with the name `mercadolibre` and create a url for the deployed app.
 
 Thanks and have a nice day.
 

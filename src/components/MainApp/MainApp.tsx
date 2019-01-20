@@ -52,7 +52,6 @@ export default class Main extends React.Component<IProps, IState> {
     this.getMercadolibreData = this.getMercadolibreData.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
-    this.getQueries = this.getQueries.bind(this);
   }
 
   public componentWillMount() {
@@ -84,12 +83,6 @@ export default class Main extends React.Component<IProps, IState> {
         }
       });
     }
-  }
-
-  // this is to sort out the query params and return the final string
-  public getQueries(current: number, value: string) {
-    const query = queryString.stringify({ page: current, sortBy: value });
-    return query;
   }
 
   // change the sortBy param when the sort field changes
